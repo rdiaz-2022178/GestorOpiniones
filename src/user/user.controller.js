@@ -18,6 +18,7 @@ export const defaultAdmin = async () => {
         let data = {
             name: 'Default',
             username: 'default',
+            email: 'default@gmail.com',
             password: await encrypt('hola'),
         }
 
@@ -78,10 +79,9 @@ export const edit = async (req, res) => {
     try {
         let data = req.body;
         let { id } = req.params
-        let {token} = req.headers
-        let {uid} = jwt.verify(token, process.env.SECRET_KEY)
+        let uid = req.user._id
         let updated = checkUpdateClient(data, id)
-        if(id !== uid) return  res.status(401).send({ message: 'you can only update your account' })
+        if(id != uid) return  res.status(401).send({ message: 'you can only update your account' })
         if (!updated) return res.status(400).send({ message: 'Have submitted some data that cannot be updated or missing data' })
         let updatedUsers = await User.findOneAndUpdate(
             { _id: id }, //ObjectsId <- hexadecimales (Hora sys, Version Mongo, Llave privada...)
@@ -100,11 +100,11 @@ export const editPassword = async (req, res) => {
     try {
         let { oldPassword, newPassword } = req.body;
         let { id } = req.params;
-        let { token } = req.headers;
-        let { uid } = jwt.verify(token, process.env.SECRET_KEY);
+        let uid = req.user._id
+
 
         // Verificar que el usuario esté intentando actualizar su propia cuenta
-        if (id !== uid) 
+        if (id != uid) 
             return res.status(401).send({ message: 'You can only update your own account' });
 
         // Verificar que se haya enviado una nueva contraseña

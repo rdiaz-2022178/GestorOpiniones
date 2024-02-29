@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "GestionOpinion",
-    "dateExported": "2024-02-28T00:14:13.162Z",
+    "dateExported": "2024-02-29T23:33:01.159Z",
     "version": "1.1",
     "folders": [
         {
@@ -107,11 +107,11 @@
             "method": "PUT",
             "sortNum": 30000,
             "created": "2024-02-26T01:29:38.105Z",
-            "modified": "2024-02-27T22:46:56.309Z",
+            "modified": "2024-02-29T23:29:27.744Z",
             "headers": [
                 {
                     "name": "token",
-                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NWRlNWE4MzgyMzhhYzljYzc2YzI1MDAiLCJ1c2VybmFtZSI6Iml6emVsIiwiZW1haWwiOiJhc2RmQGdtYWlsLmNvbSIsIm5hbWUiOiJJenplbCIsImlhdCI6MTcwOTA3MzcyOSwiZXhwIjoxNzA5MDc3MzI5fQ.eQ1TNECcrixZqZ_0yxQ5LZK9K3zYvB0fY6It3_P6rd4"
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NWRiZTg0MGFmOGE2ZmU1YmYzMTRlODQiLCJ1c2VybmFtZSI6InJvZHJvIiwibmFtZSI6IlJvZHJpZ28iLCJpYXQiOjE3MDkyNDkzMTQsImV4cCI6MTcwOTI1MjkxNH0.Y83apJ25Xzdn49r-H8dN0RAvFf2w0vJuyF4XWkcsgBI"
                 }
             ],
             "params": [],
@@ -121,11 +121,11 @@
                 "form": [
                     {
                         "name": "name",
-                        "value": "rodro"
+                        "value": "rodros"
                     },
                     {
-                        "name": "username",
-                        "value": "izzelrodro"
+                        "name": "email",
+                        "value": "rodro@gmail.com"
                     }
                 ]
             },

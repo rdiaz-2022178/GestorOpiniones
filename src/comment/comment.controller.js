@@ -7,8 +7,8 @@ import { checkUpdate } from '../../utils/validator.js'
 export const add = async (req, res) => {
     try {
         let data = req.body
-        let { token } = req.headers
-        let { uid } = jwt.verify(token, process.env.SECRET_KEY)
+        let uid = req.user._id
+
         //let uid = req.user._id
         data.user = uid
         if(!data.publication || !data.comment || !data.user) return res.status(400).send({message: 'You must send all the parameters'})
@@ -23,11 +23,9 @@ export const add = async (req, res) => {
 
 export const update = async (req, res) => {
     try {
-        let { id } = req.params
-        //let uid = req.user._id
-        let { token } = req.headers
+        
         let data = req.body
-        let { uid } = jwt.verify(token, process.env.SECRET_KEY)
+        let uid = req.user._id
         let updated = checkUpdate(data, id)
         let comment = await Comment.findOne({ _id: id, user: uid });
         if (!comment) return res.status(404).send({ message: 'Comment not found or you are not authorized to updated it' });
@@ -45,8 +43,8 @@ export const update = async (req, res) => {
 export const deleted = async (req, res) => {
     try {
         let { id } = req.params;
-        let { token } = req.headers;
-        let { uid } = jwt.verify(token, process.env.SECRET_KEY);
+        let uid = req.user._id
+
 
         // Verificar si la publicación existe y si el usuario es el propietario
         let comment = await Comment.findOne({ _id: id, user: uid });
