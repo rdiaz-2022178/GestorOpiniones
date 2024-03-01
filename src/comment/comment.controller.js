@@ -26,11 +26,12 @@ export const update = async (req, res) => {
         
         let data = req.body
         let uid = req.user._id
+        let {id} = req.params
         let updated = checkUpdate(data, id)
-        let comment = await Comment.findOne({ _id: id, user: uid });
+        let comment = await Comment.findOne({ _id: id, user: uid })
         if (!comment) return res.status(404).send({ message: 'Comment not found or you are not authorized to updated it' });
         if (!updated) return res.status(400).send({ message: 'Have submitted some data that cannot be updated or missing data' })
-        let updateComment = await Comment.findOneAndUpdate({_id: id}, data, {new: true})
+        let updateComment = await Comment.findOneAndUpdate({_id: id}, data, {new: true}).populate('user',  ['name'])
         if (!updateComment) return res.status(401).send({ message: 'Comment not found and not updated' })
         return res.send({ message: 'Updated commet', updateComment })
 
@@ -52,7 +53,7 @@ export const deleted = async (req, res) => {
             return res.status(404).send({ message: 'Comment not found or you are not authorized to delete it' });
 
         // Eliminar la publicación
-        let updatedComment = await Comment.findOneAndDelete({ _id: id, user: uid });
+        let updatedComment = await Comment.findOneAndDelete({ _id: id, user: uid }).populate('user',  ['name'])
         if (!updatedComment)
             return res.status(500).send({ message: 'Error deleting comment' });
 

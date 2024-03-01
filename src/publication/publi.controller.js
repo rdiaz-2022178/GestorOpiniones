@@ -31,7 +31,7 @@ export const deleted = async (req, res) => {
             return res.status(404).send({ message: 'Publication not found or you are not authorized to delete it' });
 
         // Eliminar la publicación
-        let deletedPublication = await Publi.findOneAndDelete({ _id: id, user: uid });
+        let deletedPublication = await Publi.findOneAndDelete({ _id: id, user: uid }).populate('category')
         if (!deletedPublication)
             return res.status(500).send({ message: 'Error deleting publication' });
 
@@ -53,7 +53,7 @@ export const update = async (req, res) => {
         let publication = await Publi.findOne({ _id: id, user: uid });
         if (!publication) return res.status(404).send({ message: 'Publication not found or you are not authorized to delete it' });
         if (!updated) return res.status(400).send({ message: 'Have submitted some data that cannot be updated or missing data' })
-        let updatePubli = await Publi.findOneAndUpdate({_id: id}, data, {new: true})
+        let updatePubli = await Publi.findOneAndUpdate({_id: id}, data, {new: true}).populate('category')
         if (!updatePubli) return res.status(401).send({ message: 'Publi not found and not updated' })
         return res.send({ message: 'Updated publi', updatePubli })
 
